@@ -1,35 +1,30 @@
 
-# Workflow name displayed in GitHub Actions
 name: CI Test Suite
 
-# Trigger events
 on:
-  push:
-    branches: ["main"]
-  # Trigger when a pull request targets main
+  push: 
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
-# Automated jobs
+
 jobs:
   validate-code:
     runs-on: ubuntu-24.04
+  
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v5
+      
+    - name: Verify HTML File Exists
+      run: |
+        if [ -f "index.html" ]; then
+        echo "SUCCESS: index.html found."
+        else
+        echo "ERROR: index.html is missing!" && exit 1
+        fi
 
-    steps:
-      # Download repository code
-      - name: Checkout Code
-        uses: actions/checkout@v5
-
-      # Check if index.html exists
-      - name: Verify HTML File Exists
-        run: |
-          if [ -f "index.html" ]; then
-            echo "SUCCESS: index.html found."
-          else
-            echo "ERROR: index.html is missing!"
-            exit 1
-          fi
-
-      # Check basic HTML structure
-      - name: Basic Syntax & Structure Check
-        run: | grep -iq "<html" index.html && echo "HTML validated." || (echo "Invalid HTML structure" && exit 1)
+    - name: Basic Syntax & Structure Check
+      run: |
+        grep -iq "<html" index.html && echo "HTML validated." || (echo
+        "Invalid HTML structure" && exit 1)

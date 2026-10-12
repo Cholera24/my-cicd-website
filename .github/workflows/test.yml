@@ -23,7 +23,7 @@ jobs:
 
       # Check if index.html exists
       - name: Verify HTML File Exists
-        run: |
+        run: /
           if [ -f "index.html" ]; then
             echo "SUCCESS: index.html found."
           else
@@ -33,4 +33,4 @@ jobs:
 
       # Check basic HTML structure
       - name: Basic Syntax & Structure Check
-        run: | grep -iq "<html" index.html && echo "HTML validated." || (echo "Invalid HTML structure" && exit 1)
+        run: / grep -iq "<html" index.html && echo "HTML validated." || (echo "Invalid HTML structure" && exit 1)

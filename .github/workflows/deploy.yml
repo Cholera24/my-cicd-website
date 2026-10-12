@@ -1,40 +1,36 @@
+name: CD Web Deployment Pipeline
 
-# Workflow name displayed in GitHub Actions
-name: CI Test Suite
 
-# Trigger events
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
-# Automated jobs
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Deployment job
 jobs:
-  validate-code:
+  deploy:
     runs-on: ubuntu-24.04
 
     steps:
-      # Download repository code
-      - name: Checkout Code
+      # Step 1: Download repository code
+      - name: Checkout Repository Code
         uses: actions/checkout@v5
 
-      # Check if index.html exists
-      - name: Verify HTML File Exists
-        run: |
-          if [ -f "index.html" ]; then
-            echo "SUCCESS: index.html found."
-          else
-            echo "ERROR: index.html is missing!"
-            exit 1
-          fi
+      # Step 2: Configure GitHub Pages
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
 
-      # Check basic HTML structure
-      - name: Basic Syntax & Structure Check
-        run: |
-          if grep -iq '<html' index.html; then
-            echo "HTML validated."
-          else
-            echo "Invalid HTML structure"
-            exit 1
-          fi
+      # Step 3: Package website files
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      # Step 4: Publish website
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

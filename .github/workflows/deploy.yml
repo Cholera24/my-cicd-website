@@ -1,5 +1,3 @@
-```yaml
-# Workflow name displayed in GitHub Actions
 name: CD Web Deployment Pipeline
 
 # Trigger deployment when code is pushed to main

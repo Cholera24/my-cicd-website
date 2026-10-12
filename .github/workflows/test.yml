@@ -1,4 +1,5 @@
 ```yaml
+# Workflow name displayed in GitHub Actions
 name: CI Test Suite
 
 # Trigger events
@@ -10,16 +11,17 @@ on:
   pull_request:
     branches: ["main"]
 
+# Automated jobs
 jobs:
   validate-code:
     runs-on: ubuntu-24.04
 
     steps:
-      # Checkout repository code
+      # Download repository code
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      # Verify that index.html exists
+      # Check if index.html exists
       - name: Verify HTML File Exists
         run: |
           if [ -f "index.html" ]; then

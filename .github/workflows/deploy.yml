@@ -1,4 +1,5 @@
 ```yaml
+# Workflow name displayed in GitHub Actions
 name: CD Web Deployment Pipeline
 
 # Trigger deployment when code is pushed to main
@@ -12,6 +13,7 @@ permissions:
   pages: write
   id-token: write
 
+# Deployment job
 jobs:
   deploy:
     runs-on: ubuntu-24.04
@@ -34,4 +36,4 @@ jobs:
       # Step 4: Publish website
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-```
+``` id="c8a4f2"

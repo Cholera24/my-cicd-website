@@ -36,4 +36,3 @@ jobs:
       # Step 4: Publish website
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-``` id="c8a4f2"
